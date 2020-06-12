@@ -1,0 +1,1 @@
+export const baseUrl = "https://hohdemobackend.ew.r.appspot.com:443/";
