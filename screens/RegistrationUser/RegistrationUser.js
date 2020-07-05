@@ -4,7 +4,7 @@
  */
 import React from 'react';
 
-import {StyleSheet,View,ScrollView} from "react-native";
+import {StyleSheet,View,ScrollView,Image} from "react-native";
 import {Text,Input,Button} from "react-native-elements";
 import { ThemeProvider } from 'react-native-elements';
 import {theme}  from "../theme";
@@ -12,6 +12,10 @@ import {signup} from "../../store/actions/auth";
 import {connect} from "react-redux";
 import * as Location from 'expo-location';
 import Loading from "../LoadingComponent"
+import { Dimensions } from 'react-native';
+const W = Dimensions.get('window').width;
+const H = Dimensions.get('window').height;
+
 const mapStateToProps=(state)=>({
   auth:state.auth
   });
@@ -139,43 +143,47 @@ getGeo=async()=>{
     
     else 
     return (
-      <ScrollView>
-      <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+      <ScrollView contentContainerStyle={{height:"100%"}}>
+      <View style={{flex:1,alignItems:"center",backgroundColor:"#FAFAFA",}}>
       <ThemeProvider theme={theme}>
             <Text h1>
                User Registration
             </Text>
             <Input
-                label='Name' onChangeText={this.changeName} value={this.state.name}
+                placeholder='Name'  placeholderTextColor="black"onChangeText={this.changeName} value={this.state.name}
             />
               <Input
-                label='Username' onChangeText={this.changeUserName} value={this.state.username}
+                placeholder='Username'  placeholderTextColor="black"onChangeText={this.changeUserName} value={this.state.username}
             />
               <Input
-                label='Password' onChangeText={this.changePassword} value={this.state.password}
+                placeholder='Password' placeholderTextColor="black" onChangeText={this.changePassword} value={this.state.password}
             />
               <Input
-                label='Email' onChangeText={this.changeEmail} value={this.state.email}
+                placeholder='Email' placeholderTextColor="black" onChangeText={this.changeEmail} value={this.state.email}
             />
 
               <Input
-                label='Adress' onChangeText={this.changeAdress} value={this.state.adress}
+                placeholder='Adress'  placeholderTextColor="black"onChangeText={this.changeAdress} value={this.state.adress}
             />
-            <Button title="Geo" onPress={this.givePermission}></Button>
+            <Button title="Geo" onPress={this.givePermission} buttonStyle={{width:W*0.45,height:60}}></Button>
               <Input
-                label='latitude' onChangeText={this.changeLat} value={String(this.state.lat)}
+                placeholder='latitude' placeholderTextColor="black" onChangeText={this.changeLat} value={String(this.state.lat)}
             />
               <Input
-                label='longitude' onChangeText={this.changeLon} value={String(this.state.lon)}
+                placeholder='longitude'  placeholderTextColor="black"onChangeText={this.changeLon} value={String(this.state.lon)}
             />
             
               <Input
-                label='Phone number' onChangeText={this.changeTel} value={String(this.state.tel)}
+                placeholder='Phone number' placeholderTextColor="black" onChangeText={this.changeTel} value={String(this.state.tel)}
             />
             <Text>{this.state.errMess}</Text>
-             <View style={{flexDirection:"row"}}>
-            <Button title="Cancel" onPress={()=>this.props.navigation.goBack()}></Button>
-            <Button title="Register" onPress={this.register}></Button>
+            <View style={{flexDirection:"row"}}>
+              <Image style={{width:W*0.3,height:W*0.3,borderWidth:2,borderColor:"black"}} source={{uri:"https://picsum.photos/200"}}/>
+              <Button title="Select Image" onPress={this.register}></Button>
+            </View>
+            <View style={{flexDirection:"row",flex:2,width:W*0.9,alignItems:"center"}}>
+            <Button title="Cancel" onPress={()=>this.props.navigation.goBack()} buttonStyle={{width:W*0.45,height:60}}></Button>
+            <Button title="Register" onPress={this.register} buttonStyle={{width:W*0.45,height:60}}></Button>
             </View>
             
          

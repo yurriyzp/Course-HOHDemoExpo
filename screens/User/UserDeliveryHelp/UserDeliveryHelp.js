@@ -124,7 +124,7 @@ else
 
     return (
       <ScrollView>
-        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"#FAFAFA"}}>
       <ThemeProvider theme={theme}>
             <Text h1>
               Request for delivery

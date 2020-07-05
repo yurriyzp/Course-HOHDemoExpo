@@ -38,16 +38,15 @@ class UserViewService extends React.Component {
     if (this.props.requests.isLoading) return (<Loading/>) 
     else
     return (
-      <ScrollView>
-      <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+      <ScrollView contentContainerStyle={{height:"100%"}}>
+      <View style={{flex:1,alignItems:"center",backgroundColor:"#FAFAFA"}}>
       <ThemeProvider theme={theme}>
-             <Text h1>
-              Request for service
-            </Text>
-            <Card title={this.props.requests.request.name} containerStyle={{backgroundColor:"yellow"}}>
-            <Text>Request status:{this.props.requests.request.status}</Text>
-            <Text >Volunteer name:{this.props.requests.request.volunteer?this.props.requests.request.volunteer.name:""}</Text>
-            <Text>Request description:{this.props.requests.request.description}</Text>
+            
+            <Card title={this.props.requests.request.name}  titleStyle={{color:"#569B23",fontSize:40}} containerStyle={{backgroundColor:"white",width:"85%"}}>
+            <Text style={{fontSize:20}} >Request type:Service</Text>
+            <Text style={{fontSize:20}}>Request status:{this.props.requests.request.status}</Text>
+            <Text style={{fontSize:20}} >Volunteer name:{this.props.requests.request.volunteer?this.props.requests.request.volunteer.name:""}</Text>
+            <Text style={{fontSize:20}}>Request description:{this.props.requests.request.description}</Text>
               
             </Card>
          

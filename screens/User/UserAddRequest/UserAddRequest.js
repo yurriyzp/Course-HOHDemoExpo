@@ -19,7 +19,7 @@ export default class Test extends React.Component {
   render() {
 
     return (
-      <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+      <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"#FAFAFA"}}>
       <ThemeProvider theme={theme}>
             <Text h1>
                Select type of help

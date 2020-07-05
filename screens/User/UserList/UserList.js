@@ -4,13 +4,17 @@
  */
 import React from 'react';
 
-import {StyleSheet,View,ScrollView} from "react-native";
+import {StyleSheet,View,ScrollView,Image} from "react-native";
 import {Text,Button,ListItem} from "react-native-elements";
 import { ThemeProvider } from 'react-native-elements';
+import { Icon } from 'react-native-elements'
 import {theme}  from "../../theme"
 import {connect} from "react-redux"
 import {get_request, delete_request,get_requests} from "../../../store/actions/requests"
 import { logout } from '../../../store/actions/auth';
+import { Dimensions } from 'react-native';
+const W = Dimensions.get('window').width;
+const H = Dimensions.get('window').height;
 const mapStateToProps=state=>({
   auth:state.auth,
   requests:state.requests
@@ -88,36 +92,48 @@ class UserList extends React.Component {
   render() {
   
     return (
-     
-        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue",marginTop:50}}>
+      <ScrollView contentContainerStyle={{height:"100%"}}>
+        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"#FAFAFA",marginTop:50}}>
       <ThemeProvider theme={theme}>
-            <Text h3>User:{this.props.auth.user?this.props.auth.user.name:""}</Text>
-            <Button title="Logout" onPress={()=>this.props.logout()}></Button>
-            <Button title="Update" onPress={()=>this.update()}></Button>
+            <Text h3>{this.props.auth.user?this.props.auth.user.name:""}</Text>
+            <Image style={{width:W*0.3,height:W*0.3,borderWidth:2,borderColor:"black"}} source={{uri:"https://picsum.photos/200"}}/>
+            <View style={{flexDirection:'row'}}>
+            <Button title="Logout" onPress={()=>this.props.logout()} buttonStyle={{width:W*0.40,height:60}}></Button>
+            <Button title="Update" onPress={()=>this.update()} buttonStyle={{width:W*0.40,height:60}}></Button>
+            </View>
             <Text h4>
               My requests
             </Text>
           
             
-        <View style={{flex:1,width:"100%"}}>
+        <View style={{flex:1,width:"100%",alignItems:"center"}}>
   { (this.props.requests.requests)?
     this.props.requests.requests.map((item, i) => (
       <ListItem
         key={i}
         title={item.name}
-        titleStyle={{color:"black",backgroundColor:"dodgerblue"}}
-        style={{}}
-        bottomDivider
+      
+        titleStyle={{color:"#569B23",fontSize:20,}}
+        style={{margin:20,width:"85%",borderRadius:40}}
+        containerStyle={{borderRadius:40,shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        
+        elevation: 5,}}
         
         onPress={()=>this.viewRequest(item.id)}
         subtitle={
-            <View style={{flexDirection:"row",}}>
+            <View style={{flexDirection:"row",backgroundColor:"white",}}>
             <View  style={{flexDirection:"column",flex:10,}}>
-        <Text>Request type:{item.isDelivery?"Delivery":item.isGoods?"Goods":item.isMoney?"Money":item.isService?"Service":""}</Text>
-        <Text>Request status:{item.status}</Text>
-        <Text>Volunteer Name:{item.volunteer?item.volunteer:"No"}</Text>
+        <Text style={{fontSize:20}}>Request type{item.isDelivery?"Delivery":item.isGoods?"Goods":item.isMoney?"Money":item.isService?"Service":""}</Text>
+        <Text style={{fontSize:20}}>Request status{item.status}</Text>
+        <Text style={{fontSize:20}}>Volunteer Name{item.volunteer?item.volunteer:"No"}</Text>
             </View>
-            <Button title="Delete" buttonStyle={{backgroundColor:"red"}}onPress={()=>this.deleteRequest(item.id)}></Button>
+            <Icon name='rowing' onPress={()=>this.deleteRequest(item.id)}></Icon>
             </View>
            
         }
@@ -133,6 +149,7 @@ class UserList extends React.Component {
 </ThemeProvider>
             
         </View>
+        </ScrollView>
         
     );
   }

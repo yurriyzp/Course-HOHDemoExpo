@@ -100,7 +100,8 @@ export const loginError = (message) => {
 export const signup=(creds)=>{
     return async dispatch=>{
         dispatch(requestSignup(creds))
-
+        var formData = new FormData();
+        
         return fetch(baseUrl + 'auth/signup', {
             method: 'POST',
             mode: "cors",

@@ -1,45 +1,26 @@
 export const theme = {
     Button: {
       buttonStyle: {
-        backgroundColor:"yellow",
-        margin:5
+        backgroundColor:"#569B23",
+        margin:5,
+       
         
       },
       titleStyle:{
-          color:"black"
+          color:"white",
+          fontSize:20
       }
     },
     Text: {
-        h1Style:{
-            color:"yellow",
-            fontSize: 14
-        },
-        h3Style:{
-            color:"yellow",
-            fontSize: 14
-        },
-        h4Style:{
-            color:"yellow",
-            fontSize: 14
-        },
-        style:{
-
+      
        
-            fontSize: 14
-            
-        }
-        
         
     },
     Input:{
-        inputStyle:{
-            color:"white"
-        },
-        labelStyle:{
-            color:"yellow",
-            fontSize:16,
-                     
-        },
+       
+       
+            color:"#569B23",
+          fontSize:20
         
     }
   }

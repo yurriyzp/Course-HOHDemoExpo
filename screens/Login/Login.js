@@ -4,14 +4,18 @@
  */
 import React from 'react';
 
-import {StyleSheet,View} from "react-native";
+import {StyleSheet,View,Image} from "react-native";
 import {Text,Input,Button} from "react-native-elements";
+
 import { ThemeProvider } from 'react-native-elements';
 import {theme}  from "../theme";
 import {connect} from "react-redux"
 import {login} from "../../store/actions/auth"
 import { get_requests } from '../../store/actions/requests';
 import Loading from "../LoadingComponent"
+import { Dimensions } from 'react-native';
+const W = Dimensions.get('window').width;
+const H = Dimensions.get('window').height;
 
 
 const mapStateToProps=state=>({
@@ -106,28 +110,28 @@ changePassword=(e)=>{
     
     else 
     return (
-      <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+      <View style={{flex:1,alignItems:"center",backgroundColor:"#FAFAFA",}}>
       <ThemeProvider theme={theme}>
-            <Text h3>
-                Login
-            </Text>
+        <View style={{marginTop:50,alignItems:"center"}}>
+            <Text h1 style={{fontFamily:"Arial"}}>Hands of Help</Text>
+            <Image source={require("../images/hand.jpg")} style={{width:W*0.9,marginTop:20,marginBottom:20}} />
+            </View>
+            <View style={{marginTop:20,marginBottom:20,alignItems:"center",flex:10}}>
             <Input
-                label='username' onChangeText={this.changeUserName} value={this.state.username}
+                placeholder='Username' placeholderTextColor="black" onChangeText={this.changeUserName} value={this.state.username} containerStyle={{width:W*0.9}}  inputContainerStyle={{borderColor:"black",borderBottomWidth:2,}}
             />
             <Input
-                label='password' onChangeText={this.changePassword} value={this.state.password}
+                placeholder='Password' placeholderTextColor="black" onChangeText={this.changePassword} value={this.state.password}  containerStyle={{width:W*0.9,borderColor:"black"}} inputContainerStyle={{borderColor:"black",borderBottomWidth:2}}
             />
             <Text style={{color:"red",fontSize:24}}>{this.state.errMess}</Text>
-            <View style={{flexDirection:"row"}}>
+ 
             
-            <Button title="Login" onPress={this.login}></Button>
+            <Button title="Login" onPress={this.login} buttonStyle={{width:W*0.5,height:60}}></Button>
+        
             </View>
-            <Text h3>
-              Registration
-            </Text>
-            <View style={{flexDirection:"row"}}>
-            <Button title="I could help" onPress={()=>this.props.navigation.navigate("RegistrationVolunteer")}></Button>
-            <Button title="I need help" onPress={()=>this.props.navigation.navigate("RegistrationUser")}></Button>
+            <View style={{flexDirection:"row",flex:2,width:W*0.9,alignItems:"center"}}>
+            <Button title="I could help" onPress={()=>this.props.navigation.navigate("RegistrationVolunteer")} buttonStyle={{width:W*0.45,height:60}}></Button>
+            <Button title="I need help" onPress={()=>this.props.navigation.navigate("RegistrationUser")} buttonStyle={{width:W*0.45,height:60}}></Button>
             </View>
 
             </ThemeProvider>

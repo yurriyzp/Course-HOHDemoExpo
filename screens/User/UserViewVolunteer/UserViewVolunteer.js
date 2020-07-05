@@ -35,7 +35,7 @@ class UserViewVolunteer extends React.Component {
 let volunteer=this.props.geo.volunteers_near.find(val=>val._id===this.props.chat.receiver);
 
     return (
-        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"#FAFAFA"}}>
       <ThemeProvider theme={theme}>
             <Text h1>Volunteer:</Text>
             <Text h1>

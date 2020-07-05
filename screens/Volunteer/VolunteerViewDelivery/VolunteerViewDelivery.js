@@ -5,7 +5,7 @@
 import React from 'react';
 
 import {StyleSheet,View,ScrollView} from "react-native";
-import {Text,Button,Card} from "react-native-elements";
+import {Text,Button,Card,ListItem} from "react-native-elements";
 import { ThemeProvider } from 'react-native-elements';
 import {theme}  from "../../theme"
 import {connect} from "react-redux"
@@ -85,74 +85,102 @@ class VolunteerViewDelivery extends React.Component {
     if (this.props.requests.isLoading) return (<Loading/>) 
     else
     return (
-      <ScrollView>
-        <View style={{flex:1,alignItems:"center",justifyContent:"center",backgroundColor:"dodgerblue"}}>
+      <ScrollView contentContainerStyle={{height:"100%"}}>
+        <View style={{flex:1,alignItems:"center",backgroundColor:"#FAFAFA"}}>
       <ThemeProvider theme={theme}>
-              <Text h1>
-              Request for delivery
-            </Text>
-            <Card title={this.props.requests.request.name} containerStyle={{backgroundColor:"yellow"}}>
+             
+            <Card title={this.props.requests.request.name} titleStyle={{color:"#569B23",fontSize:40}} containerStyle={{backgroundColor:"white",width:"85%",borderRadius:40,shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        
+        elevation: 5,borderRadius:40}}>
+          <View style={{flexDirection:"row",alignItems:"center"}}>
+          <Text style={{fontSize:25,color:"#569B23"}} >Request type </Text><Text style={{fontSize:25,fontWeight:"bold"}}>Delivery</Text>
+          </View>
+          <View style={{flexDirection:"row",alignItems:"center"}}>
+          <Text style={{fontSize:25,color:"#569B23"}} >Request status </Text><Text style={{fontSize:25,fontWeight:"bold"}}>{this.props.requests.request.status}</Text>
+          </View>
+          <View style={{flexDirection:"row",alignItems:"center"}}>
+          <Text style={{fontSize:25,color:"#569B23"}}>User name </Text><Text style={{fontSize:25,fontWeight:"bold"}}>{this.props.requests.request.user?this.props.requests.request.user.name:""}</Text>
+          </View>
+          <View style={{flexDirection:"row",alignItems:"center"}}>
+          <Text style={{fontSize:25,color:"#569B23"}}>User phone </Text><Text style={{fontSize:25,fontWeight:"bold"}}>{this.props.requests.request.user?this.props.requests.request.user.phone:""}</Text>
+          </View>
+          
+            
+             
               
-              <Text>Request status:{this.props.requests.request.status}</Text>
-              <Text>User name:{this.props.requests.request.user?this.props.requests.request.user.name:""}</Text>
-              <Text>User phone:{this.props.requests.request.user?this.props.requests.request.user.phone:""}</Text>
               
               
             </Card>
-            <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",marginBottom:30,
-          borderBottomColor:"yellow",
-          borderBottomWidth:2}}>
-            <View style={styles.column}>
-            <Text style={styles.textStyle}>Name:</Text>
-            </View>
-            <View style={styles.column}>
-            <Text style={styles.textStyle}>Amount:</Text>
-            </View>
-            <View style={styles.column}>
-            <Text style={styles.textStyle}>Price:</Text>
-            </View>
-            <View style={styles.column}>
-            <Text style={styles.textStyle}>Where:</Text>
-            </View>
-            <View style={styles.column}>
-            <Text style={styles.textStyle}>Status:</Text>
-            </View>
-            </View>
+            <Text h3>Goods list</Text>
             {
-              this.props.requests.request.goods.map((item,idx)=>{
-                return (
-                  <View style={{flexDirection:"column"}}>
-                  <View style={{flexDirection:"row",margin:5,alignItems:"center", justifyContent:"center",width:"100%"}}>
-                  <View style={styles.column}>
-                  <Text style={styles.textStyle}>{item.name}</Text>
-                  </View>
-                  <View style={styles.column}>
-                  <Text style={styles.textStyle}>{item.amount}</Text>
-                  </View>
-                  <View style={styles.column}>
-                  <Text style={styles.textStyle}>{item.price}</Text>
-                  </View>
-                  <View style={styles.column}>
-                  <Text style={styles.textStyle}>{item.place}</Text>
-                  </View>
+              this.props.requests.request.goods.map((item,idx)=>(
+               
 
-                  <View style={styles.column}>
-                  <Text style={styles.textStyle}>{item.status}</Text>
-                  </View>
-                  </View>
-                  <View style={{flexDirection:"row",margin:10,alignItems:"center", justifyContent:"center", borderBottomColor:"yellow",
-    borderBottomWidth:2}}>
-                  <Button title="OK" onPress={()=>this.doneGood(item._id)}/>
+                  <ListItem
+                  key={idx}
+                  title={item.name}
+                  containerStyle={{borderRadius:40,shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        
+        elevation: 5,}}
+        
+        titleStyle={{color:"#569B23",fontSize:25,textAlign:"center"}}
+                  style={{margin:20,width:"85%",borderRadius:40}}
+                  bottomDivider
+                  
+                  onPress={()=>this.viewRequest(item.id)}
+                  subtitle={
+                      <View style={{flexDirection:"row",backgroundColor:"white",}}>
+                      <View  style={{flexDirection:"column",flex:10,borderRadius:30}}>
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                      <Text style={{fontSize:20,color:"#569B23"}}>Amount </Text>
+                      <Text style={{fontSize:20,fontWeight:"bold"}}>{item.amount}</Text>
+                    </View>
+
+
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                      <Text style={{fontSize:20,color:"#569B23"}}>Price </Text>
+                      <Text style={{fontSize:20,fontWeight:"bold"}}>{item.price}</Text>
+                    </View>
+
+
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                      <Text style={{fontSize:20,color:"#569B23"}}>Place </Text>
+                      <Text style={{fontSize:20,fontWeight:"bold"}}>{item.place}</Text>
+                    </View>
+
+                    <View style={{flexDirection:"row",alignItems:"center"}}>
+                      <Text style={{fontSize:20,color:"#569B23"}}>Status </Text>
+                      <Text style={{fontSize:20,fontWeight:"bold"}}>{item.status}</Text>
+                    </View>
+                
+                
+               
+                      </View>
+                      <Button title="OK" onPress={()=>this.doneGood(item._id)}/>
                    <Button title="Fail" onPress={()=>this.failGood(item._id)}/>
-                   </View>
-                  </View>
-                 
-                 
-                 
-                 
-                )
-              })
-            }
+                      </View>
+                     
+                  }
+                />
+
+                  
+              
+              ))
+                }
+
+    
             
             <View style={{marginTop:30}}>
          <Button title="Accept Request" onPress={this.acceptRequest} ></Button>

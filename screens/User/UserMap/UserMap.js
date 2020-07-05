@@ -80,7 +80,7 @@ class UserMap extends React.Component {
                     >
                     <MapView.Callout 
                     tooltip
-                    style={{backgroundColor:"dodgerblue"}}
+                    style={{backgroundColor:"#FAFAFA"}}
                     >
                                       <TouchableHighlight  underlayColor='#dddddd'>
                                           <View >
